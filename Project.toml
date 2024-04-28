@@ -1,7 +1,13 @@
 name = "CoolWalks"
 
 [deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+CompositeBuildings = "a870b4e5-37c8-4ee1-9e3a-8b7ad2177db1"
+CoolWalksUtils = "5abba2a6-77e2-4331-9785-93f3fa89e9c9"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
+ShadowGraphs = "bb16ec3a-7e9e-4bd8-a580-2befe1914c0f"
 
 [compat]
 DrWatson = "2.14.1"

@@ -35,4 +35,10 @@ include("city_loading.jl")
 export MANHATTAN_CENTER, BARCELONA_CENTER, VALENCIA_CENTER
 export load_city
 
+include("example_city_setups.jl")
+export MANHATTAN_BIKE, MANHATTAN_WALK
+export BARCELONA_BIKE, BARCELONA_WALK
+export VALENCIA_BIKE, VALENCIA_WALK
+export MANHATTAN_GRID, MANHATTAN_RANDOM, BARCELONA_GRID
+
 end

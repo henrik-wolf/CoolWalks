@@ -70,7 +70,7 @@ const MANHATTAN_GRID = RectangleCitySetup(
     tz"America/New_York",
     0.0,
     1,
-    MTL,
+    MAX_TRIP_LENGTH,
     false,
 )
 
@@ -82,7 +82,7 @@ const MANHATTAN_RANDOM = RandomCitySetup(
     MANHATTAN_CENTER,
     tz"America/New_York",
     1,
-    MTL,
+    MAX_TRIP_LENGTH,
     false
 )
 
@@ -93,7 +93,7 @@ const BARCELONA_GRID = RectangleCitySetup(
     45,
     9,
     20,
-    BACELONA_CENTER,
+    BARCELONA_CENTER,
     tz"Europe/Madrid",
     0,
     1,

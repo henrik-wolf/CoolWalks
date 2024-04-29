@@ -223,4 +223,4 @@ f = with_theme(theme_paper_2col(heightwidthratio=0.7), figure_padding=(1, 3, 1, 
     f
 end
 
-save(joinpath(PA_OUT, "fig1_alpha_changes_paths_v3.png"), f, px_per_unit=5)
+save(plotsdir("fig1_alpha_changes_paths.png"), f, px_per_unit=5)

@@ -2,7 +2,7 @@
 
 julia_version = "1.10.0"
 manifest_format = "2.0"
-project_hash = "6c9e5c36856c5e90ef3426872ee65ef8793169ce"
+project_hash = "371e7a8c908fa58e15d86c76f7191ed6aaff8496"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -131,6 +131,11 @@ version = "0.4.7"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
+
+[[deps.Bezier]]
+git-tree-sha1 = "b0d4d8b8628ecafca829c6f9ac0e529b368fbe6e"
+uuid = "4ec6fef6-ecd9-481e-97e1-75598c2ab6c2"
+version = "0.1.7"
 
 [[deps.BitFlags]]
 git-tree-sha1 = "2dc09997850d68179b69dafb58ae806167a32b1b"
@@ -1142,6 +1147,12 @@ deps = ["Observables", "REPL"]
 git-tree-sha1 = "248b7a4be0f92b497f7a331aed02c1e9a878f46b"
 uuid = "20f20a25-4f0e-4fdf-b5d1-57303727442b"
 version = "0.7.3"
+
+[[deps.MakiePublication]]
+deps = ["ColorSchemes", "Colors", "Makie", "MathTeXEngine"]
+git-tree-sha1 = "4f1b8887917fd31880a0e6154649af46b58e69ee"
+uuid = "dde8697e-0d61-460d-88dd-856f66710dd1"
+version = "0.3.5"
 
 [[deps.MappedArrays]]
 git-tree-sha1 = "2dab0221fe2b0f2cb6754eaa743cc266339f527e"

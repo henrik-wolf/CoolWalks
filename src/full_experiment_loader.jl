@@ -15,7 +15,7 @@ function postprocess_result(data; exclude_locals)
         filter!(:a => >(1.0), _)
         transform!([:a, :all_way_length] => ByRow((a, len_a) -> coolwalkability(a, len_a, a1.all_way_length)) => :coolwalkability_global)
         transform!(:daytime => ByRow(d -> [Date(d), Time(d)]) => [:date, :time])
-        transform!(:all_edge_length => ByRow(shade_frac) => :shadow_fraction_global)
+        transform!(:all_edge_length => ByRow(shadow_fraction) => :shadow_fraction_global)
     end
     if !exclude_locals
         transform!(data, [:a, :way_lengths] => ByRow((a, len_a) -> coolwalkability.(a, len_a, a1.way_lengths)) => :coolwalkability_local)

@@ -65,7 +65,6 @@ function postprocess_city!(city, setup::T) where {T<:AbstractCitySetup}
 end
 
 function cut_and_tag!(city; max_trip_length)
-    @info "$(filter_vertices(city.streets, :inside, true) |> collect |> length) inside of circle"
     cut_around!(city, max_trip_length * 2)
     tag_inside!(city, max_trip_length)
     set_prop!(city.streets, :max_trip_length, max_trip_length)

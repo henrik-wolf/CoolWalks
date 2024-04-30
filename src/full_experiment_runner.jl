@@ -14,7 +14,9 @@ function run_experiment_on(city, experiment::FullExperiment)
     for daytime in times
         @info "starting time $daytime"
         add_shadow_intervals!(city, daytime)
-        @showprogress 1 "routing for time $daytime" for a in experiment.sun_aversions
+        pbar = ProgressBar(experiment.sun_aversions, printing_delay=1.0)
+        set_description(pbar, "routing for time $daytime")
+        for a in pbar
             param_dict = @strdict daytime a
             distance_dict = extract_data(city, a, experiment; reachability=reachability)
             push!(result, merge(distance_dict, param_dict), cols=:union)
@@ -77,7 +79,7 @@ A dictionary with the following (String) keys:
 - `all_edge_length`: total length of all edges (`ShadowWeight`) (uses `ShadowWeights`, rather than `SymmetricShadowWeights`, no matter the setting in `experiment`).
 """
 function extract_data(city, a, experiment; reachability)
-    way_lengths = zeros(ShadowWeight, nv(city.g))  # total length of shortest path with current weights (needed for CoolWalkability)
+    way_lengths = zeros(ShadowWeight, nv(city.streets))  # total length of shortest path with current weights (needed for CoolWalkability)
 
     max_trip_length = get_prop(city.streets, :max_trip_length)
     w = experiment.weight_type(city.streets, a)
@@ -91,12 +93,12 @@ function extract_data(city, a, experiment; reachability)
     end
     all_way_length = sum(way_lengths)
 
-    all_edge_length = if experiment.w isa ShadowWeights
+    all_edge_length = if w isa ShadowWeights
         sum(Graphs.weights(simple_g))
-    else if experiment.w isa SymmetricShadowWeights
+    elseif experiment.w isa SymmetricShadowWeights
         w_s = ShadowWeights(city.streets, a)
         # not sure if this is strictly necessary, given that non-existent edges should have weight zero(ShadowWeight)
-        simple_g_for_shade = MinistryOfCoolWalks.to_SimpleWeightedDiGraph(city.streets, w_s) 
+        simple_g_for_shade = MinistryOfCoolWalks.to_SimpleWeightedDiGraph(city.streets, w_s)
         sum(Graphs.weights(simple_g_for_shade))
     end
 

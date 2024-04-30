@@ -21,6 +21,8 @@ using MakiePublication
 using Colors
 using Makie
 using IterTools
+using ProgressBars
+using LinearAlgebra
 
 @reexport using DataFrames
 @reexport using Dates
@@ -65,9 +67,9 @@ export set_constant_height!, height_distribution, resample_heights!
 
 
 include("experiments.jl")
-export FullExperiment
-include("experiment_runner.jl")
-export run_experiment_on
+export FullExperiment, run_experiment_on
+
+include("full_experiment_runner.jl")
 
 include("paper_theme.jl")
 export theme_paper, theme_paper_2col, SEQ_COL

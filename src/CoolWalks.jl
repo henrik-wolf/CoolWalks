@@ -33,7 +33,7 @@ export bg
 const AS = [1.1, 1.25, 1.5, 2, 4, 10]
 const WINTER_SOLSTICE = Date(2023, 12, 21)
 const SUMMER_SOLSTICE = Date(2023, 6, 21)
-export WINTER_SOLSTICE, SUMMER_SOLSTICE
+export AS, WINTER_SOLSTICE, SUMMER_SOLSTICE
 
 include("city_types.jl")
 export SB_City
@@ -58,6 +58,16 @@ export MANHATTAN_GRID, MANHATTAN_RANDOM, BARCELONA_GRID
 
 include("simple_city.jl")
 export build_simple_city
+
+include("preprocess_city.jl")
+export set_constant_height!, height_distribution, resample_heights!
+
+
+
+include("experiments.jl")
+export FullExperiment
+include("experiment_runner.jl")
+export run_experiment_on
 
 include("paper_theme.jl")
 export theme_paper, theme_paper_2col, SEQ_COL

@@ -27,6 +27,7 @@ using LinearAlgebra
 @reexport using DataFrames
 @reexport using Dates
 @reexport using StatsBase
+@reexport using Chain
 
 GeoInterfaceMakie.@enable ArchGDAL.IGeometry
 bg(g) = GeoInterface.convert(GeometryBasics, g)
@@ -70,6 +71,12 @@ include("experiments.jl")
 export FullExperiment, run_experiment_on
 
 include("full_experiment_runner.jl")
+
+include("measures.jl")
+export coolwalkability, shadow_fraction
+
+include("full_experiment_loader.jl")
+export load_run
 
 include("paper_theme.jl")
 export theme_paper, theme_paper_2col, SEQ_COL

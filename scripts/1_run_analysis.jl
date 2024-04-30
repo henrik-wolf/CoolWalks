@@ -1,5 +1,6 @@
 using DrWatson
 @quickactivate :CoolWalks
+using MinistryOfCoolWalks
 
 experiment = FullExperiment(ShadowWeights, SUMMER_SOLSTICE, AS)
 
@@ -18,7 +19,7 @@ let OUTDIR = datadir("exp_pro", "real_cities")
             observatory = city.observatory
 
             out_data = @strdict city_setup experiment constant_height observatory result
-            safesave(joinpath(OUTDIR, city.cityname * ".jld2"), out_data)
+            safesave(joinpath(OUTDIR, "$(city.name).jld2"), out_data)
         end
     end
 end
@@ -38,7 +39,7 @@ let OUTDIR = datadir("exp_pro", "synthetic_manhattan")
             observatory = city.observatory
 
             out_data = @strdict city_setup experiment constant_height observatory result
-            safesave(joinpath(OUTDIR, city.cityname * ".jld2"), out_data)
+            safesave(joinpath(OUTDIR, "$(city.name).jld2"), out_data)
         end
     end
 end
@@ -47,15 +48,17 @@ end
 let OUTDIR = datadir("exp_pro", "synthetic_barcelona")
     empirical_height_hist = height_distribution(BARCELONA_BIKE)
 
-    for constant_height in [true, false]
-        city = load_city(BARCELONA_GRID)
-        if !constant_height
-            resample_heights!(city, empirical_height_hist)
-        end
-        result = run_experiment_on(city, experiment)
-        observatory = city.observatory
+    for city_setup in [BARCELONA_GRID]
+        for constant_height in [false, true]
+            city = load_city(city_setup)
+            if !constant_height
+                resample_heights!(city, empirical_height_hist)
+            end
+            result = run_experiment_on(city, experiment)
+            observatory = city.observatory
 
-        out_data = @strdict city_setup experiment constant_height observatory result
-        safesave(joinpath(OUTDIR, city.cityname * ".jld2"), out_data)
+            out_data = @strdict city_setup experiment constant_height observatory result
+            safesave(joinpath(OUTDIR, "$(city.name).jld2"), out_data)
+        end
     end
 end

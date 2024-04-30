@@ -63,9 +63,7 @@ include("simple_city.jl")
 export build_simple_city
 
 include("preprocess_city.jl")
-export set_constant_height!, height_distribution, resample_heights!
-
-
+export set_constant_building_height!, height_distribution, resample_heights!
 
 include("experiments.jl")
 export FullExperiment, run_experiment_on

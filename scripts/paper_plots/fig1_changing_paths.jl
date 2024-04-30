@@ -45,8 +45,6 @@ v_end = first(filter_vertices(valencia.streets, :sg_osm_id, v_end_osm))
 
 paths, lengths = paths_and_lengths(valencia.streets, as, v_start, v_end)
 
-paths
-
 function draw_simple!(ax1, ax2)
     hidedecorations!(ax1)
 
@@ -204,9 +202,9 @@ end
 f = with_theme(theme_paper_2col(heightwidthratio=0.7), figure_padding=(1, 3, 1, 0)) do
     f = Figure()
     ax1 = Axis(f[1, 1], autolimitaspect=1.0)
-    ax2 = Axis(f[1, 2], ylabel="length [km]", xlabel="α")
+    ax2 = Axis(f[1, 2], ylabel="Length [km]", xlabel="α")
     ax3 = Axis(f[2, 1], autolimitaspect=1.0)
-    ax4 = Axis(f[2, 2], ylabel="length [km]", xlabel="α", ytickformat="{:.1f}")
+    ax4 = Axis(f[2, 2], ylabel="Length [km]", xlabel="α", ytickformat="{:.1f}")
 
     hidexdecorations!(ax2)
     linkxaxes!(ax2, ax4)

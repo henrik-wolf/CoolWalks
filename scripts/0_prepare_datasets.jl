@@ -51,6 +51,6 @@ valencia_files = [
 ]
 for file in valencia_files
     if !isfile(joinpath(valencia_dir, file))
-        @warn "valencia file missing: ", joinpath(valencia_dir, file...)
+        @warn "Valencia file missing: ", joinpath(valencia_dir, file...)
     end
 end

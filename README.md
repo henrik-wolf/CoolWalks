@@ -16,7 +16,7 @@ To (locally) reproduce this project, do the following:
    julia> Pkg.add("DrWatson") # install globally, for using `quickactivate`
 
    # add the registry which distributes the CoolWalks packages
-   julia> Pkg.Registry.add(RegistrySpec(url="https://github.com/SuperGrobi/CoolWalksRegistry"))
+   julia> Pkg.Registry.add(RegistrySpec(url="https://github.com/henrik-wolf/CoolWalksRegistry"))
 
    julia> Pkg.activate("path/to/this/project")
 

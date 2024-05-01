@@ -24,6 +24,7 @@ using IterTools
 using ProgressBars
 using LinearAlgebra
 using PlotUtils
+using Clustering
 
 @reexport using DataFrames
 @reexport using Dates
@@ -77,11 +78,17 @@ export coolwalkability, shadow_fraction
 include("full_experiment_loader.jl")
 export load_run
 
+include("spatial_clustering.jl")
+export prepare_cluster, clusters_simplified
+
 include("paper_theme.jl")
 export theme_paper, theme_paper_2col, SEQ_COL
 
 include("plotting_utils.jl")
 export partition_on_jumps, to_web_mercator, to_pretty_path, sun_arrows!, draw_city!
-export findbetween, cross_marker, draw_city_with_heights!, scatter_on_cb!
+export findbetween, cross_marker, draw_city_with_heights!, scatter_on_cb!, circle_mask
+export current_colors
 export TimeTicks, time_x
+export resample_lines_as_points, shade_points, normalize_shaded_arrays
+
 end

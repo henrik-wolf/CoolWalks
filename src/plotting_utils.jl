@@ -170,6 +170,15 @@ function scatter_on_cb!(cb, x, y; debug=true, kwargs...)
     cb
 end
 
+function circle_mask(x, y, r)
+    center = ArchGDAL.createpoint(x, y)
+    c1 = ArchGDAL.buffer(center, 2r)
+    c2 = ArchGDAL.buffer(center, r)
+    return ArchGDAL.difference(c1, c2)
+end
+
+current_colors() = Makie.current_default_theme().palette.color[]
+
 # MARK: Timeticks
 
 # make makie plot times on x axis
@@ -209,4 +218,36 @@ function Makie.get_ticks(t::TimeTicks, any_scale, ::Makie.Automatic, vmin, vmax)
     ticktimes = Time.(Dates.epochms2datetime.(dateticks_all))
     ticktimes_str = Dates.format.(ticktimes, "HH:MM")
     return dateticks_all, ticktimes_str
+end
+
+# MARK: datashading
+function resample_as_points(line, n=400; pert=0.0)
+    ls = ArchGDAL.createlinestring(range(0, 1, length(line)) |> collect, line |> collect)
+    total_length = ArchGDAL.geomlength(ls)
+    alongs = range(0, total_length, n)
+    perts = (Float32(pert) * Point2f(randn(), randn()) for i in 1:n)
+    points = (ArchGDAL.pointalongline.(Ref(ls), along) |> GeoInterface.coordinates |> Point2f for along in alongs)
+    return map(+, perts, points)
+end
+
+function resample_lines_as_points(lines, n=40000; pert=0.0)
+    vcat((resample_as_points(p, ceil(Int, n / length(lines)), pert=pert) for p in lines)...)
+end
+
+function shade_points(points; resolution=(800, 800))
+    bb = Makie.fast_bb(points, identity) |> Rect2f
+    canvas = Makie.Canvas(bb; op=Makie.AggCount{Float32}(), resolution=resolution)
+    Makie.Aggregation.aggregate!(canvas, points; method=Makie.AggThreads())
+    image = Makie.Aggregation.get_aggregation(canvas; operation=identity, local_operation=identity)
+    return image, bb
+end
+
+function normalize_shaded_arrays(pixels)
+    max_val = maximum(sum(k -> k[2][1], pixels))
+    for (i, (px, bb)) in pixels
+        for j in eachindex(px)
+            px[j] = log10(px[j] + 1) / log10(max_val + 1)
+        end
+    end
+    return pixels
 end

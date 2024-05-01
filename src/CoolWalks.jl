@@ -23,6 +23,7 @@ using Makie
 using IterTools
 using ProgressBars
 using LinearAlgebra
+using PlotUtils
 
 @reexport using DataFrames
 @reexport using Dates
@@ -80,5 +81,7 @@ include("paper_theme.jl")
 export theme_paper, theme_paper_2col, SEQ_COL
 
 include("plotting_utils.jl")
-export partition_on_jumps, to_web_mercator, to_pretty_path
+export partition_on_jumps, to_web_mercator, to_pretty_path, sun_arrows!, draw_city!
+export findbetween, cross_marker
+export TimeTicks, time_x
 end

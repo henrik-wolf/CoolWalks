@@ -82,6 +82,6 @@ export theme_paper, theme_paper_2col, SEQ_COL
 
 include("plotting_utils.jl")
 export partition_on_jumps, to_web_mercator, to_pretty_path, sun_arrows!, draw_city!
-export findbetween, cross_marker
+export findbetween, cross_marker, draw_city_with_heights!, scatter_on_cb!
 export TimeTicks, time_x
 end

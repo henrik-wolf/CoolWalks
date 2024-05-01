@@ -113,6 +113,63 @@ function cross_marker(s; aspect=1)
     ])
 end
 
+
+function draw_city_with_heights!(axs, city, center; color_max=nothing)
+    for e in filter_edges(city.streets, :sg_street_geometry)
+        street_geometry = get_prop(city.streets, e, :sg_street_geometry)
+        if GeoInterface.intersects(center, street_geometry)
+            # lines!(ax, street_geometry, linewidth=0.1, color=:black)
+        end
+    end
+    polys = [(bg(r.geometry), r.height) for r in eachrow(city.buildings) if GeoInterface.intersects(center, r.geometry)]
+    if isnothing(color_max)
+        color_max = maximum(i[2] for i in polys)
+    end
+    poly!(axs[1], getindex.(polys, 1), color=getindex.(polys, 2), colorrange=(0.0, color_max))
+    axs[2].colorrange[] = (0.0, color_max)
+    # poly!(ax, bg(ArchGDAL.buffer(g, 0.3, 1)), color=:lightgrey, strokewidth=0.0, strokecolor=:lightgrey)
+    axs
+end
+
+function coords_from_box(cb, x, y)
+    box = cb.layoutobservables.computedbbox[]
+    vertical = cb.vertical[]
+    # box = cb.layoutobservables.computedbbox[]
+    data_size = box.widths[vertical ? 2 : 1]
+    other_size = box.widths[vertical ? 1 : 2]
+    data_coords = vertical ? y : x
+    other_coords = vertical ? x : y
+
+    limits = cb.limits[]
+    @show limits
+    if !isnothing(limits)
+        data_coords_px = data_size / (limits[2] - limits[1]) .* (data_coords)
+        other_coords_px = other_coords .* other_size
+        return if vertical
+            Point2f.(other_coords_px .+ box.origin[1], data_coords_px .+ box.origin[2])
+        else
+            Point2f.(data_coords_px .+ box.origin[1], other_coords_px .+ box.origin[2])
+        end
+    else
+        return [Point2f(100, 0) for i in 1:length(x)]
+    end
+end
+
+function scatter_on_cb!(cb, x, y; debug=true, kwargs...)
+    marker_pos = Observable(coords_from_box(cb, x, y))
+    debug_points = Observable([Point2f(0, 0), Point2f(0, 0)])
+
+    scatter!(cb.blockscene, marker_pos; kwargs...)
+    if debug
+        scatter!(cb.blockscene, debug_points; kwargs...)
+    end
+
+    on(cb.layoutobservables.computedbbox) do box
+        marker_pos[] = coords_from_box(cb, x, y)
+    end
+    cb
+end
+
 # MARK: Timeticks
 
 # make makie plot times on x axis

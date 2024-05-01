@@ -31,7 +31,7 @@ const BARCELONA_BIKE = RealCitySetup(
 )
 const BARCELONA_WALK = RealCitySetup(
     :barcelona,
-    :bike,
+    :walk,
     SB_City,
     BARCELONA_CENTER,
     MAX_TRIP_LENGTH,
@@ -50,7 +50,7 @@ const VALENCIA_BIKE = RealCitySetup(
 )
 const VALENCIA_WALK = RealCitySetup(
     :valencia,
-    :bike,
+    :walk,
     SB_City,
     VALENCIA_CENTER,
     MAX_TRIP_LENGTH,

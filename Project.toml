@@ -38,7 +38,7 @@ VoronoiCells = "e3e34ffb-84e9-5012-9490-92c94d0c60a4"
 [compat]
 ArchGDAL = "0.10.1"
 Bezier = "0.1.7"
-airoMakie = "0.11.10"
+CairoMakie = "0.11.10"
 Chain = "0.5.0"
 Clustering = "0.15.7"
 Colors = "0.12.10"

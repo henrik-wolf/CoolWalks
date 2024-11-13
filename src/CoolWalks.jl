@@ -25,6 +25,7 @@ using ProgressBars
 using LinearAlgebra
 using PlotUtils
 using Clustering
+using GeoJSON
 
 @reexport using DataFrames
 @reexport using Dates

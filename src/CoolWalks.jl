@@ -51,14 +51,16 @@ export RealCitySetup, HexagonCitySetup, RectangleCitySetup, RandomCitySetup
 
 include("synthetic_cities.jl")
 
+include("park_loading.jl")
+
 include("city_loading.jl")
 export MANHATTAN_CENTER, BARCELONA_CENTER, VALENCIA_CENTER
 export load_city
 
 include("example_city_setups.jl")
-export MANHATTAN_BIKE, MANHATTAN_WALK
-export BARCELONA_BIKE, BARCELONA_WALK
-export VALENCIA_BIKE, VALENCIA_WALK
+export MANHATTAN_BIKE, MANHATTAN_WALK, MANHATTAN_PARK_BIKE, MANHATTAN_PARK_WALK
+export BARCELONA_BIKE, BARCELONA_WALK, BARCELONA_PARK_BIKE, BARCELONA_PARK_WALK
+export VALENCIA_BIKE, VALENCIA_WALK, VALENCIA_PARK_BIKE, VALENCIA_PARK_WALK
 export MANHATTAN_GRID, MANHATTAN_RANDOM, BARCELONA_GRID
 
 include("simple_city.jl")

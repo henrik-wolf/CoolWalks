@@ -1,6 +1,6 @@
 const MAX_TRIP_LENGTH = 800.0
 
-# MARK: real cities
+# MARK: real cities with buildings
 const MANHATTAN_BIKE = RealCitySetup(
     :manhattan,
     :bike,
@@ -52,6 +52,64 @@ const VALENCIA_WALK = RealCitySetup(
     :valencia,
     :walk,
     SB_City,
+    VALENCIA_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+
+# MARK: Real cities with buildings and parks
+const MANHATTAN_PARK_BIKE = RealCitySetup(
+    :manhattan,
+    :bike,
+    SBP_City,
+    MANHATTAN_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+const MANHATTAN_PARK_WALK = RealCitySetup(
+    :manhattan,
+    :walk,
+    SBP_City,
+    MANHATTAN_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+
+const BARCELONA_PARK_BIKE = RealCitySetup(
+    :barcelona,
+    :bike,
+    SBP_City,
+    BARCELONA_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+const BARCELONA_PARK_WALK = RealCitySetup(
+    :barcelona,
+    :walk,
+    SBP_City,
+    BARCELONA_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+
+const VALENCIA_PARK_BIKE = RealCitySetup(
+    :valencia,
+    :bike,
+    SBP_City,
+    VALENCIA_CENTER,
+    MAX_TRIP_LENGTH,
+    true,
+    false
+)
+const VALENCIA_PARK_WALK = RealCitySetup(
+    :valencia,
+    :walk,
+    SBP_City,
     VALENCIA_CENTER,
     MAX_TRIP_LENGTH,
     true,

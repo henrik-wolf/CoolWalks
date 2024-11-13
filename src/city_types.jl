@@ -6,6 +6,17 @@ mutable struct SB_City <: AbstractCityDataset
     buildings::DataFrame
     shadows::DataFrame
 end
+
+mutable struct SBP_City <: AbstractCityDataset
+    name::Symbol
+    observatory::ShadowObservatory
+    streets::MetaGraphs.MetaDiGraph
+    buildings::DataFrame
+    parks::DataFrame
+    building_shadows::DataFrame
+    park_shadows::DataFrame
+end
+
 mutable struct ST_City <: AbstractCityDataset
     name::Symbol
     observatory::ShadowObservatory

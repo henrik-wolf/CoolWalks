@@ -44,6 +44,17 @@ function MinistryOfCoolWalks.add_shadow_intervals!(city::SBT_City, sunpos::Abstr
     return (s1, s2)
 end
 
+function MinistryOfCoolWalks.add_shadow_intervals!(city::SBP_City, sunpos::AbstractVector)
+    s1 = CompositeBuildings.cast_shadows(city.buildings, sunpos)
+    add_shadow_intervals!(city.streets, s1; clear_old_shadows=true)
+    city.building_shadows = s1
+
+    s2 = CompositeBuildings.cast_shadows(city.parks, sunpos)
+    add_shadow_intervals!(city.streets, s2; clear_old_shadows=false)
+    city.park_shadows = s2
+    return (s1, s2)
+end
+
 # MARK: projections
 function CoolWalksUtils.project_local!(city::AbstractCityDataset)
     project_local!(city.streets, city.observatory)

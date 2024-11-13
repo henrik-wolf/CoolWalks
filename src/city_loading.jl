@@ -45,6 +45,17 @@ function load_real_city(setup, name::Val{:valencia}, network_type::Val{T}, city_
     return SB_City(:valencia, obs, g, b, DataFrame())
 end
 
+# load park cities
+function load_real_city(setup, name::Val{C}, network_type::Val{T}, city_type::Type{SBP_City}) where {C,T}
+    city = load_real_city(setup, name, network_type, SB_City)
+    parks = load_parks(name)
+    return SBP_City(city.name, city.observatory, city.streets, city.buildings, parks, city.shadows, DataFrame())
+end
+
+load_parks(name::Val{:manhattan}) = load_parks(datadir("exp_raw", "manhattan", "parks.geojson"), "ManhattanParksObservatory", tz"America/New_York")
+load_parks(name::Val{:barcelona}) = load_parks(datadir("exp_raw", "barcelona", "parks.geojson"), "BarcelonaParksObservatory", tz"Europe/Madrid")
+load_parks(name::Val{:valencia}) = load_parks(datadir("exp_raw", "valencia", "parks.geojson"), "ValenciaParksObservatory", tz"Europe/Madrid")
+
 # MARK: load synthetic cities
 load_synthetic_city(setup::RectangleCitySetup) = grid_city(setup)
 load_synthetic_city(setup::RandomCitySetup) = random_voronoi_city(setup)
@@ -99,9 +110,14 @@ end
 cut_around_casters!(city::SB_City, distance) = cut_around_casters!(city.buildings, city.observatory, distance)
 cut_around_casters!(city::ST_City, distance) = cut_around_casters!(city.trees, city.observatory, distance)
 
-function cut_around_casters!(city, distance)
+function cut_around_casters!(city::SBT_City, distance)
     cut_around_casters!(city.buildings, city.observatory, distance)
     cut_around_casters!(city.trees, city.observatory, distance)
+end
+
+function cut_around_casters!(city::SBP_City, distance)
+    cut_around_casters!(city.buildings, city.observatory, distance)
+    cut_around_casters!(city.parks, city.observatory, distance)
 end
 
 function cut_around_casters!(geometry_df, observatory, distance)

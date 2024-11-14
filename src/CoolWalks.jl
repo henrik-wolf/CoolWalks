@@ -20,6 +20,7 @@ using Bezier
 using MakiePublication
 using Colors
 using Makie
+using CairoMakie
 using IterTools
 using ProgressBars
 using LinearAlgebra
@@ -40,6 +41,11 @@ const AS = [1.0, 1.1, 1.25, 1.5, 2, 4, 10]
 const WINTER_SOLSTICE = Date(2023, 12, 21)
 const SUMMER_SOLSTICE = Date(2023, 6, 21)
 export AS, WINTER_SOLSTICE, SUMMER_SOLSTICE
+
+function __init__()
+    CairoMakie.enable_only_mime!("image/png")
+    Makie.set_theme!(CairoMakie=(px_per_unit=5.0,))
+end
 
 include("city_types.jl")
 export SB_City

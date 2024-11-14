@@ -1,3 +1,10 @@
+function set_constant_building_height!(city)
+    project_local!(city)
+    mean_height = mean(city.buildings.height, StatsBase.weights(ArchGDAL.geomarea(city.buildings.geometry)))
+    set_constant_building_height!(city, mean_height)
+    project_back!(city)
+    return city
+end
 function set_constant_building_height!(city, height)
     city.buildings.height .= height
     return city

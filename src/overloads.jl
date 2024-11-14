@@ -72,9 +72,16 @@ function project_casters_local!(city::ST_City)
 end
 function project_casters_local!(city::SBT_City)
     project_local!(city.buildings, city.observatory)
-    project_local!(city.builing_shadows, city.observatory)
+    project_local!(city.building_shadows, city.observatory)
     project_local!(city.trees, city.observatory)
     project_local!(city.tree_shadows, city.observatory)
+end
+
+function project_casters_local!(city::SBP_City)
+    project_local!(city.buildings, city.observatory)
+    project_local!(city.building_shadows, city.observatory)
+    project_local!(city.parks, city.observatory)
+    project_local!(city.park_shadows, city.observatory)
 end
 
 function CoolWalksUtils.project_back!(city::AbstractCityDataset)
@@ -93,9 +100,15 @@ function project_casters_back!(city::ST_City)
 end
 function project_casters_back!(city::SBT_City)
     project_back!(city.buildings)
-    project_back!(city.builing_shadows)
+    project_back!(city.building_shadows)
     project_back!(city.trees)
     project_back!(city.tree_shadows)
+end
+function project_casters_back!(city::SBP_City)
+    project_back!(city.buildings)
+    project_back!(city.building_shadows)
+    project_back!(city.parks)
+    project_back!(city.park_shadows)
 end
 
 """

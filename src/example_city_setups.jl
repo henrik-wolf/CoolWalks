@@ -1,4 +1,4 @@
-const MAX_TRIP_LENGTH = 800.0
+const MAX_TRIP_LENGTH = 2400.0
 
 # MARK: real cities with buildings
 const MANHATTAN_BIKE = RealCitySetup(
@@ -116,6 +116,10 @@ const VALENCIA_PARK_WALK = RealCitySetup(
     false
 )
 
+const MANHATTAN_AVERAGE_HEIGHT = 40.0
+const BARCELONA_AVERAGE_HEIGHT = 18.5
+const VALENCIA_AVERAGE_HEIGHT = 16.7
+
 # MARK: synthetic cities
 const MANHATTAN_GRID = RectangleCitySetup(
     :manhattan,
@@ -123,7 +127,7 @@ const MANHATTAN_GRID = RectangleCitySetup(
     270.0,
     61.0,
     11.5,
-    71.0,
+    MANHATTAN_AVERAGE_HEIGHT,
     MANHATTAN_CENTER,
     tz"America/New_York",
     0.0,
@@ -136,7 +140,7 @@ const MANHATTAN_RANDOM = RandomCitySetup(
     :manhattan,
     80 * 270,
     11.5,
-    71.0,
+    MANHATTAN_AVERAGE_HEIGHT,
     MANHATTAN_CENTER,
     tz"America/New_York",
     1,
@@ -150,7 +154,7 @@ const BARCELONA_GRID = RectangleCitySetup(
     133,
     45,
     9,
-    20,
+    BARCELONA_AVERAGE_HEIGHT,
     BARCELONA_CENTER,
     tz"Europe/Madrid",
     0,

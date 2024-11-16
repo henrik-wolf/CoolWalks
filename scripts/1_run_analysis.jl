@@ -6,9 +6,10 @@ experiment = FullExperiment(ShadowWeights, SUMMER_SOLSTICE, AS)
 constant_heights = Dict(:manhattan => 40.0, :barcelona => 18.5, :valencia => 16.7)
 
 function run_everything(city_setups, outdir)
-    for constant_height in [false, true]
+    for constant_height in [false]
         for city_setup in city_setups
             city = load_city(city_setup)
+            @info typeof(city)
             if constant_height
                 set_constant_building_height!(city, constant_heights[city_setup.name])
             end
@@ -24,12 +25,15 @@ end
 
 # MARK: Real cities, real and constant height
 let OUTDIR = datadir("exp_pro", "real_cities_large", "buildings")
-    real_city_setups = [MANHATTAN_BIKE, BARCELONA_BIKE, VALENCIA_BIKE, MANHATTAN_WALK, BARCELONA_WALK, VALENCIA_WALK]
+    # real_city_setups = [MANHATTAN_BIKE, BARCELONA_BIKE, VALENCIA_BIKE, MANHATTAN_WALK, BARCELONA_WALK, VALENCIA_WALK]
+    real_city_setups = [MANHATTAN_WALK, BARCELONA_WALK, VALENCIA_WALK]
     run_everything(real_city_setups, OUTDIR)
 end
 
 let OUTDIR = datadir("exp_pro", "real_cities_large", "parks")
-    real_city_setups = [MANHATTAN_PARK_BIKE, BARCELONA_PARK_BIKE, VALENCIA_PARK_BIKE, MANHATTAN_PARK_WALK, BARCELONA_PARK_WALK, VALENCIA_PARK_WALK]
+    @info "saving to $OUTDIR"
+    # real_city_setups = [MANHATTAN_PARK_BIKE, BARCELONA_PARK_BIKE, VALENCIA_PARK_BIKE, MANHATTAN_PARK_WALK, BARCELONA_PARK_WALK, VALENCIA_PARK_WALK]
+    real_city_setups = [MANHATTAN_PARK_WALK, BARCELONA_PARK_WALK, VALENCIA_PARK_WALK]
     run_everything(real_city_setups, OUTDIR)
 end
 
